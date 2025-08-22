@@ -12,6 +12,7 @@
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
+<pre id="gl" class="gl"></pre>
 <textarea id="tex" class="tex" oninput="ale();"></textarea>
 <iframe id="runt" class="runt"></iframe>
 <div id="p" class="p">
@@ -35,6 +36,7 @@
 <span id="p18" onclick="plus=this.innerHTML;pluss(plus);" class="pl">*</span>
 <span id="p19" onclick="plus=this.innerHTML;pluss(plus);" class="pl">'</span>
 <span id="p20" onclick="plus=this.innerHTML;pluss(plus);" class="pl">\</span>
+<span id="p21" onclick="plus=this.innerHTML;pluss(plus);" class="pl">`</span>
 </div>
   </body>
 <style>
@@ -60,11 +62,21 @@ top:25px;
 background-color:rgba(255,255,255,0.2);
 width:100vw;
 height:100vh;
-color:white;
+color:transparent;
+caret-color:white;
 border:0px solid white;
 padding:5px;
 font-size:15px;
 line-height:20px;
+}
+.gl{
+position:absolute;
+color:white;
+z-index:99;
+line-height:20px;
+margin:5px;
+top:25px;
+font-size:15px;
 }
 .runt{
 position:fixed;
@@ -135,7 +147,7 @@ position:fixed;
 bottom:0;
 width:100vw;
 height:30px;
-background-color:rgba(255,255,255,0.3);
+background-color:rgba(255,255,255,0.1);
 z-index:101;
 color:white;
 overflow-x:auto;
@@ -146,14 +158,22 @@ padding:5px;
 margin:5px;
 font-size:20px;
 }
+.glq{
+color:#629fff;
+}
+.glw{
+color:#ff958c;
+}
 </style>
 <script src="uxb.js"></script>
 <script>
+const glll=["body","head","title","meta","type","onclick","oninput","id","class","alt","value"];
+const gllla=["this"];
 let plus;
 function cz(){
 pd=0;
 runt.style.height=window.innerHeight-25+"px";
-tex.style.height = window.innerHeight - 60 + 'px';
+tex.style.height = window.innerHeight - 65 + 'px';
 tex.style.width  = window.innerWidth - 5  + 'px';
 }
 let pd=0;
@@ -167,7 +187,7 @@ pd=Math.round(pd);
 runt.style.height=pd+"px";
 },500);
 window.addEventListener('resize', () => {
-  tex.style.height = window.innerHeight - 60 + 'px';
+  tex.style.height = window.innerHeight - 65 + 'px';
   tex.style.width  = window.innerWidth - 5  + 'px';
 });
 tex.value=`<!DOCTYPE html>
@@ -264,18 +284,29 @@ const hasha = [
 "position(CSS)",
 "display(CSS)",
 "margin(CSS)",
+"margin-top(CSS)",
+"margin-bottom(CSS)",
+"margin-left(CSS)",
+"margin-top(CSS)",
 "padding(CSS)",
+"padding-left(CSS)",
+"padding-top(CSS)",
+"padding-bottom(CSS)",
+"padding-right(CSS)",
 "z-index(CSS)",
 "min-width(CSS)",
 "max-width(CSS)",
 "min-height(CSS)",
 "max-height(CSS)",
+"filter(CSS)",
+"backdrop-filter(CSS)",
 "top(CSS)",
 "left(CSS)",
 "right(CSS)",
 "bottom(CSS)",
 "fixed(CSS属性)",
 "center(CSS属性)",
+"auto(CSS属性)",
 "opacity(CSS)",
 "overflow(CSS)",
 "overflow-x(CSS)",
@@ -304,7 +335,9 @@ const hasha = [
 "h4(HTML)",
 "h5(HTML)",
 "h6(HTML)",
+"html(HTML)",
 "p(HTML)",
+"pre(HTML)",
 "s(HTML)",
 "div(HTML)",
 "form(HTML)",
@@ -315,6 +348,21 @@ const hasha = [
 "br(HTML)",
 "ins(HTML)",
 "a(HTML)",
+"nav(HTML)",
+"rp(HTML)",
+"rt(HTML)",
+"sub(HTML)",
+"sup(HTML)",
+"audio(HTML)",
+"table(HTML)",
+"b(HTML)",
+"i(HTML)",
+"u(HTML)",
+"ul(HTML)",
+"ol(HTML)",
+"code(HTML)",
+"video(HTML)",
+"mark(HTML)",
 "span(HTML)",
 "label(HTML)",
 "src(属性)",
@@ -347,7 +395,31 @@ const hasha = [
 "style(HTML)",
 "link(HTML)"
 ];
+for(var i=0;i<hasha.length;i++){
+const c=hasha[i].split("(");
+if(c[1]=="HTML)"){
+glll.push(c[0]);
+}
+if(!c[1]){
+gllla.push(c[0]);
+}
+}
+let glhtml;
 function ale() {
+  let glhtml = tex.value
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  const esca = glll.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+const escb = gllla.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+  const rege = new RegExp(`\\b(${esca.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(rege, "<span class='glq'>$1</span>");
+const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(regea, "<span class='glw'>$1</span>");
+  gl.innerHTML = glhtml;
   fh = "";
   ts.style.display = "none";
   const text = tex.value;
@@ -367,6 +439,7 @@ function ale() {
     ts.style.display = 'none';
   }
 }
+ale();
 function goto(){
 const gita=window.open("https://github.com/UPLCC/code","_blank");
 if(gita){
@@ -381,6 +454,7 @@ function pluss(plus) {
   tex.value = before + plus + after;
   tex.selectionStart = tex.selectionEnd = posss + plus.length;
   tex.focus();
+ale();
 }
 </script>
 </html>
