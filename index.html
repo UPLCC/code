@@ -8,6 +8,7 @@
 <div id="top-d" class="top-d">
 <span id="ex" class="ex" onclick="exitCode();">返回</span>
 <span id="cza" class="cza" onclick="cz();">重置UI</span>
+<span id="go" class="go" onclick="goto();">开源</span>
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
@@ -102,6 +103,11 @@ display:none;
 max-height:150px;
 overflow-y:auto;
 }
+.go{
+position:absolute;
+left:35%;
+top:10%;
+}
 </style>
 <script src="uxb.js"></script>
 <script>
@@ -128,7 +134,6 @@ tex.value=`<!DOCTYPE html>
 <script src="uxb.js"><\/script>
 <body>
 <h1>Hello World!</h1>
-<p>编译器来自UPLCC</p>
 </body>
 </html>`;
 function runCode(){
@@ -201,6 +206,10 @@ const hasha = [
 "push",
 "pop",
 "splice",
+"substr",
+"window.open",
+"window.confirm",
+"grid-columns(CSS)",
 "@keyframes(CSS)",
 "@font-face(CSS)",
 "width(CSS)",
@@ -300,7 +309,7 @@ function ale() {
   const pos  = tex.selectionStart;
   if (pos == null) return;
   const left = text.slice(0, pos);
-  const m = left.match(/([a-zA-Z0-9.\-_]+)$/);
+  const m = left.match(/([a-zA-Z0-9.\-_/]+)$/);
   if (!m) return;
   const cur = m[1];
   const matched = hasha.filter(w => w.toLowerCase().startsWith(cur.toLowerCase()));
@@ -312,6 +321,12 @@ function ale() {
   if (nextChar === ' ' || nextChar === ',') {
     ts.style.display = 'none';
   }
+}
+function goto(){
+const gita=window.open("https://github.com/UPLCC/code","_blank");
+if(gita){
+gita.opener=null;
+}
 }
 </script>
 </html>
