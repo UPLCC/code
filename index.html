@@ -14,6 +14,28 @@
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
 <textarea id="tex" class="tex" oninput="ale();"></textarea>
 <iframe id="runt" class="runt"></iframe>
+<div id="p" class="p">
+<span id="p1" onclick="plus='<';pluss(plus);" class="pl"><</span>
+<span id="p2" onclick="plus='>';pluss(plus);" class="pl">></span>
+<span id="p3" onclick="plus=this.innerHTML;pluss(plus);" class="pl">/</span>
+<span id="p4" onclick="plus=this.innerHTML;pluss(plus);" class="pl">=</span>
+<span id="p5" onclick="plus=this.innerHTML;pluss(plus);" class="pl">"</span>
+<span id="p6" onclick="plus=this.innerHTML;pluss(plus);" class="pl">:</span>
+<span id="p7" onclick="plus=this.innerHTML;pluss(plus);" class="pl">;</span>
+<span id="p8" onclick="plus=this.innerHTML;pluss(plus);" class="pl">(</span>
+<span id="p9" onclick="plus=this.innerHTML;pluss(plus);" class="pl">)</span>
+<span id="p10" onclick="plus=this.innerHTML;pluss(plus);" class="pl">{</span>
+<span id="p11" onclick="plus=this.innerHTML;pluss(plus);" class="pl">}</span>
+<span id="p12" onclick="plus=this.innerHTML;pluss(plus);" class="pl">[</span>
+<span id="p13" onclick="plus=this.innerHTML;pluss(plus);" class="pl">]</span>
+<span id="p14" onclick="plus=this.innerHTML;pluss(plus);" class="pl">%</span>
+<span id="p15" onclick="plus=this.innerHTML;pluss(plus);" class="pl">!</span>
+<span id="p16" onclick="plus=this.innerHTML;pluss(plus);" class="pl">_</span>
+<span id="p17" onclick="plus=this.innerHTML;pluss(plus);" class="pl">-</span>
+<span id="p18" onclick="plus=this.innerHTML;pluss(plus);" class="pl">*</span>
+<span id="p19" onclick="plus=this.innerHTML;pluss(plus);" class="pl">'</span>
+<span id="p20" onclick="plus=this.innerHTML;pluss(plus);" class="pl">\</span>
+</div>
   </body>
 <style>
 *{
@@ -108,13 +130,30 @@ position:absolute;
 left:35%;
 top:10%;
 }
+.p{
+position:fixed;
+bottom:0;
+width:100vw;
+height:30px;
+background-color:rgba(255,255,255,0.3);
+z-index:101;
+color:white;
+overflow-x:auto;
+white-space:nowrap;
+}
+.pl{
+padding:5px;
+margin:5px;
+font-size:20px;
+}
 </style>
 <script src="uxb.js"></script>
 <script>
+let plus;
 function cz(){
 pd=0;
 runt.style.height=window.innerHeight-25+"px";
-tex.style.height = window.innerHeight - 30 + 'px';
+tex.style.height = window.innerHeight - 60 + 'px';
 tex.style.width  = window.innerWidth - 5  + 'px';
 }
 let pd=0;
@@ -128,7 +167,7 @@ pd=Math.round(pd);
 runt.style.height=pd+"px";
 },500);
 window.addEventListener('resize', () => {
-  tex.style.height = window.innerHeight - 30 + 'px';
+  tex.style.height = window.innerHeight - 60 + 'px';
   tex.style.width  = window.innerWidth - 5  + 'px';
 });
 tex.value=`<!DOCTYPE html>
@@ -333,6 +372,15 @@ const gita=window.open("https://github.com/UPLCC/code","_blank");
 if(gita){
 gita.opener=null;
 }
+}
+function pluss(plus) {
+  const tex = document.getElementById('tex');
+  const posss = tex.selectionStart;
+  const before = tex.value.slice(0, posss);
+  const after = tex.value.slice(posss);
+  tex.value = before + plus + after;
+  tex.selectionStart = tex.selectionEnd = posss + plus.length;
+  tex.focus();
 }
 </script>
 </html>
