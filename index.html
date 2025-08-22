@@ -113,8 +113,9 @@ top:10%;
 <script>
 function cz(){
 pd=0;
-heig=0;
 runt.style.height=window.innerHeight-25+"px";
+tex.style.height = window.innerHeight - 30 + 'px';
+tex.style.width  = window.innerWidth - 5  + 'px';
 }
 let pd=0;
 setInterval(()=>{
@@ -126,14 +127,10 @@ pd=Math.round(pd);
 }
 runt.style.height=pd+"px";
 },500);
-let heig=0;
-setInterval(()=>{
-if(window.innerHeight!==heig){
-tex.style.height=window.innerHeight-30+"px";
-tex.style.width=window.innerWidth-5+"px";
-}
-heig=window.innerHeight;
-},100);
+window.addEventListener('resize', () => {
+  tex.style.height = window.innerHeight - 30 + 'px';
+  tex.style.width  = window.innerWidth - 5  + 'px';
+});
 tex.value=`<!DOCTYPE html>
 <html>
 <head>
