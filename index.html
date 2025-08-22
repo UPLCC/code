@@ -12,7 +12,6 @@
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
-<pre id="gl" class="gl"></pre>
 <textarea id="tex" class="tex" oninput="ale();"></textarea>
 <iframe id="runt" class="runt"></iframe>
 <div id="p" class="p">
@@ -36,7 +35,6 @@
 <span id="p18" onclick="plus=this.innerHTML;pluss(plus);" class="pl">*</span>
 <span id="p19" onclick="plus=this.innerHTML;pluss(plus);" class="pl">'</span>
 <span id="p20" onclick="plus=this.innerHTML;pluss(plus);" class="pl">\</span>
-<span id="p21" onclick="plus=this.innerHTML;pluss(plus);" class="pl">`</span>
 </div>
   </body>
 <style>
@@ -62,21 +60,11 @@ top:25px;
 background-color:rgba(255,255,255,0.2);
 width:100vw;
 height:100vh;
-color:transparent;
-caret-color:white;
+color:white;
 border:0px solid white;
 padding:5px;
 font-size:15px;
 line-height:20px;
-}
-.gl{
-position:absolute;
-color:white;
-z-index:99;
-line-height:20px;
-margin:5px;
-top:25px;
-font-size:15px;
 }
 .runt{
 position:fixed;
@@ -158,17 +146,9 @@ padding:5px;
 margin:5px;
 font-size:20px;
 }
-.glq{
-color:#629fff;
-}
-.glw{
-color:#ff958c;
-}
 </style>
 <script src="uxb.js"></script>
 <script>
-const glll=["body","head","title","meta","type","onclick","oninput","id","class","alt","value"];
-const gllla=["this"];
 let plus;
 function cz(){
 pd=0;
@@ -395,31 +375,7 @@ const hasha = [
 "style(HTML)",
 "link(HTML)"
 ];
-for(var i=0;i<hasha.length;i++){
-const c=hasha[i].split("(");
-if(c[1]=="HTML)"){
-glll.push(c[0]);
-}
-if(!c[1]){
-gllla.push(c[0]);
-}
-}
-let glhtml;
 function ale() {
-  let glhtml = tex.value
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-  const esca = glll.map(k =>
-    k.replace(/[.*+?^${}()|]/g, '\\$&')
-  );
-const escb = gllla.map(k =>
-    k.replace(/[.*+?^${}()|]/g, '\\$&')
-  );
-  const rege = new RegExp(`\\b(${esca.join("|")})\\b`, "gi");
-  glhtml = glhtml.replace(rege, "<span class='glq'>$1</span>");
-const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "gi");
-  glhtml = glhtml.replace(regea, "<span class='glw'>$1</span>");
-  gl.innerHTML = glhtml;
   fh = "";
   ts.style.display = "none";
   const text = tex.value;
@@ -439,7 +395,6 @@ const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "gi");
     ts.style.display = 'none';
   }
 }
-ale();
 function goto(){
 const gita=window.open("https://github.com/UPLCC/code","_blank");
 if(gita){
@@ -454,7 +409,6 @@ function pluss(plus) {
   tex.value = before + plus + after;
   tex.selectionStart = tex.selectionEnd = posss + plus.length;
   tex.focus();
-ale();
 }
 </script>
 </html>
