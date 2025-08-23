@@ -9,9 +9,15 @@
 <span id="ex" class="ex" onclick="exitCode();">返回</span>
 <span id="cza" class="cza" onclick="cz();">重置UI</span>
 <span id="go" class="go" onclick="goto();">开源</span>
-<span id="down" class="down" onclick="downLo();">保存</span>
+<span id="down" class="down" onclick="filex();">文件</span>
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
+<div id="filec" class="filec">
+<p id="bc" class="bc" onclick="downLo();">保存</p>
+<p id="dra" class="dra" onclick="fileRe();">导入</p>
+<input type="file" id="xzfile" class="xzfile" style="display:none;"/>
+</div>
+<div id="fileq" class="fileq" onclick="if(iffile){filex();}"></div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
 <textarea id="tex" class="tex" oninput="ale();"></textarea>
 <iframe id="runt" class="runt"></iframe>
@@ -49,7 +55,7 @@ background-color:rgba(0,0,0,0.8);
 }
 .top-d{
 position:fixed;
-z-index:999;
+z-index:900;
 width:100vw;
 height:25px;
 background-color:rgba(255,255,255,0.1);
@@ -153,6 +159,28 @@ padding:5px;
 margin:5px;
 font-size:20px;
 }
+.filec{
+position:fixed;
+z-index:999;
+width:130px;
+background-color:rgba(255,255,255,0.3);
+border:3px solid white;
+border-radius:10px;
+backdrop-filter:blur(3px);
+top:30px;
+left:50%;
+color:white;
+padding:5px;
+display:none;
+}
+.fileq{
+position:fixed;
+z-index:949;
+width:100vw;
+height:100vh;
+opacity:0;
+display:none;
+}
 </style>
 <script src="uxb.js"></script>
 <script>
@@ -188,7 +216,16 @@ tex.value=`<!DOCTYPE html>
 <h1>Hello World!</h1>
 </body>
 </html>`;
+let yxif=false;
+setInterval(()=>{
+if(yxif){
+ex.style.display="block";
+}else{
+run.style.display="block";
+}
+},1000);
 function runCode(){
+yxif=true;
 ts.style.display="none";
 runt.style.display="block";
 runt.style.animationName="runa";
@@ -204,6 +241,7 @@ run.style.display="none";
 runt.srcdoc=tex.value;
 }
 function exitCode(){
+yxif=false;
 runt.style.animationName="runb";
 runt.style.animationDuration="0.3s";
 ex.style.animationName="runb";
@@ -419,7 +457,8 @@ function pluss(plus) {
 }
 let coda,userprom;
 function downLo(){
-coda=tex.value.trim();
+filex();
+coda=tex.value;
 userprom=window.prompt("文件名");
 if(!userprom||!coda){
 alert("文件名或代码为空");
@@ -439,5 +478,36 @@ const blob = new Blob([coda], { type: 'text/html;charset=utf-8' });
   document.body.removeChild(aaa);
   URL.revokeObjectURL(urlaa);
 }
+let iffile=false;
+function filex(){
+if(!iffile){
+fileq.style.display="block";
+filec.style.display="block";
+filec.style.animationName="runa";
+filec.style.animationDuration="0.3s";
+iffile=true;
+}else{
+fileq.style.display="none";
+filec.style.animationName="runb";
+filec.style.animationDuration="0.3s";
+setTimeout(()=>{
+filec.style.display="none";
+iffile=false;
+},300);
+}
+}
+function fileRe(){
+xzfile.click();
+filex();
+}
+document.getElementById("xzfile").addEventListener("change",(event)=>{
+const filel=event.target.files[0];
+const reader=new FileReader();
+reader.onload=function (e){
+filetext=e.target.result;
+tex.value=filetext;
+}
+reader.readAsText(filel);
+});
 </script>
 </html>
