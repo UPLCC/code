@@ -9,6 +9,7 @@
 <span id="ex" class="ex" onclick="exitCode();">返回</span>
 <span id="cza" class="cza" onclick="cz();">重置UI</span>
 <span id="go" class="go" onclick="goto();">开源</span>
+<span id="down" class="down" onclick="downLo();">保存</span>
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
@@ -35,7 +36,6 @@
 <span id="p18" onclick="plus=this.innerHTML;pluss(plus);" class="pl">*</span>
 <span id="p19" onclick="plus=this.innerHTML;pluss(plus);" class="pl">'</span>
 <span id="p20" onclick="plus=this.innerHTML;pluss(plus);" class="pl">\</span>
-<span id="p21" onclick="plus=this.innerHTML;pluss(plus);" class="pl">`</span>
 </div>
   </body>
 <style>
@@ -129,6 +129,11 @@ overflow-y:auto;
 .go{
 position:absolute;
 left:35%;
+top:10%;
+}
+.down{
+position:absolute;
+left:50%;
 top:10%;
 }
 .p{
@@ -410,6 +415,28 @@ function pluss(plus) {
   tex.value = before + plus + after;
   tex.selectionStart = tex.selectionEnd = posss + plus.length;
   tex.focus();
+}
+let coda,userprom;
+function downLo(){
+coda=tex.value.trim();
+userprom=window.prompt("文件名");
+if(!userprom||!coda){
+alert("文件名或代码为空");
+return;
+}
+if(!userprom.endsWith(".html")){
+userprom+=".html";
+}
+const blob = new Blob([coda], { type: 'text/html;charset=utf-8' });
+  const urlaa = URL.createObjectURL(blob);
+  const aaa = document.createElement('a');
+  aaa.href = urlaa;
+  aaa.download = userprom;
+  aaa.style.display = 'none';
+  document.body.appendChild(aaa);
+  aaa.click();
+  document.body.removeChild(aaa);
+  URL.revokeObjectURL(urlaa);
 }
 </script>
 </html>
