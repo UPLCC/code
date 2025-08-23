@@ -19,7 +19,8 @@
 </div>
 <div id="fileq" class="fileq" onclick="if(iffile){filex();}"></div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
-<textarea id="tex" class="tex" oninput="ale();"></textarea>
+<pre id="gl" class="gl"></pre>
+<textarea id="tex" class="tex" oninput="ale();" warp="hard"></textarea>
 <iframe id="runt" class="runt"></iframe>
 <div id="p" class="p">
 <span id="p1" onclick="plus='<';pluss(plus);" class="pl"><</span>
@@ -58,8 +59,15 @@ position:fixed;
 z-index:900;
 width:100vw;
 height:25px;
-background-color:rgba(255,255,255,0.1);
+background-color:#333333;
 color:white;
+}
+.top-b{
+position:fixed;
+z-index:899;
+width:100vw;
+height:25px;
+background-color:rgba(0,0,0,0.8);
 }
 .tex{
 position:fixed;
@@ -68,11 +76,28 @@ top:25px;
 background-color:rgba(255,255,255,0.2);
 width:100vw;
 height:100vh;
-color:white;
+color:transparent;
+caret-color:white;
 border:0px solid white;
 padding:5px;
 font-size:15px;
 line-height:20px;
+white-space: pre;
+word-wrap: break-word;
+overflow-wrap: break-word;
+}
+.gl{
+position:fixed;
+overflow-x:hidden;
+color:white;
+z-index:99;
+line-height:20px;
+margin:5px;
+top:25px;
+font-size:15px;
+white-space: pre;
+word-wrap: break-word;
+overflow-wrap: break-word;
 }
 .runt{
 position:fixed;
@@ -148,7 +173,7 @@ position:fixed;
 bottom:0;
 width:100vw;
 height:30px;
-background-color:rgba(255,255,255,0.1);
+background-color:#333333;
 z-index:101;
 color:white;
 overflow-x:auto;
@@ -181,6 +206,18 @@ height:100vh;
 opacity:0;
 display:none;
 }
+.glq{
+color:#629fff;
+}
+.glw{
+color:#ff958c;
+}
+.gle{
+color:#ffdf8c;
+}
+.glr{
+color:#ef97ff;
+}
 </style>
 <script src="uxb.js"></script>
 <script>
@@ -189,7 +226,7 @@ function cz(){
 pd=0;
 runt.style.height=window.innerHeight-25+"px";
 tex.style.height = window.innerHeight - 65 + 'px';
-tex.style.width  = window.innerWidth - 5  + 'px';
+tex.style.width  = window.innerWidth - 10  + 'px';
 }
 let pd=0;
 setInterval(()=>{
@@ -203,14 +240,22 @@ runt.style.height=pd+"px";
 },500);
 window.addEventListener('resize', () => {
   tex.style.height = window.innerHeight - 65 + 'px';
-  tex.style.width  = window.innerWidth - 5  + 'px';
+  tex.style.width  = window.innerWidth - 10  + 'px';
 });
+setInterval(()=>{
+const to=Number(tex.scrollTop)-25;
+gl.style.top = -to+"px";
+gl.style.left = -tex.scrollLeft+"px";
+},1);
+let glll=["body","head","title","meta","type","onclick","oninput","id","class","alt","value"];
+let gllla=["this"];
 tex.value=`<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>UPLCC</title>
 </head>
+<!--在别的编译器里用需要把uxb.js改成https://uplcc.github.io/code/uxb.js-->
 <script src="uxb.js"><\/script>
 <body>
 <h1>Hello World!</h1>
@@ -223,6 +268,7 @@ ex.style.display="block";
 }else{
 run.style.display="block";
 }
+ale();
 },1000);
 function runCode(){
 yxif=true;
@@ -420,7 +466,47 @@ const hasha = [
 "style(HTML)",
 "link(HTML)"
 ];
+let glllb=[];
+let glllc=[];
+for(var i=0;i<hasha.length;i++){
+const ccc=hasha[i].split("(");
+if(ccc[1]=="HTML)"){
+glll.push(ccc[0]);
+}
+if(!ccc[1]){
+gllla.push(ccc[0]);
+}
+if(ccc[1]=="CSS)"){
+glllb.push(ccc[0]);
+}
+if(ccc[1]=="uxb)"){
+glllc.push(ccc[0]);
+}
+}
+let glhtml;
 function ale() {
+  glhtml = tex.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const esca = glll.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+const escb = gllla.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+const escc = glllb.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+  const escd = glllc.map(k =>
+    k.replace(/[.*+?^${}()|]/g, '\\$&')
+  );
+  const rege = new RegExp(`\\b(${esca.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(rege, "<span class='glq'>$1</span>");
+const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(regea, "<span class='glw'>$1</span>");
+const regeb = new RegExp(`\\b(${escc.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(regeb, "<span class='gle'>$1</span>");
+const regec = new RegExp(`\\b(${escd.join("|")})\\b`, "gi");
+  glhtml = glhtml.replace(regec, "<span class='glr'>$1</span>");
+  gl.innerHTML = glhtml;
   fh = "";
   ts.style.display = "none";
   const text = tex.value;
@@ -440,6 +526,7 @@ function ale() {
     ts.style.display = 'none';
   }
 }
+ale();
 function goto(){
 const gita=window.open("https://github.com/UPLCC/code","_blank");
 if(gita){
@@ -454,6 +541,7 @@ function pluss(plus) {
   tex.value = before + plus + after;
   tex.selectionStart = tex.selectionEnd = posss + plus.length;
   tex.focus();
+  ale();
 }
 let coda,userprom;
 function downLo(){
@@ -499,8 +587,10 @@ iffile=false;
 function fileRe(){
 xzfile.click();
 filex();
+ale();
 }
 document.getElementById("xzfile").addEventListener("change",(event)=>{
+ale();
 const filel=event.target.files[0];
 const reader=new FileReader();
 reader.onload=function (e){
