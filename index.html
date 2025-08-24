@@ -20,7 +20,7 @@
 <div id="fileq" class="fileq" onclick="if(iffile){filex();}"></div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
 <pre id="gl" class="gl"></pre>
-<textarea id="tex" class="tex" oninput="ale();" warp="hard"></textarea>
+<textarea id="tex" class="tex" oninput="ale();glh();" warp="hard"></textarea>
 <iframe id="runt" class="runt"></iframe>
 <div id="p" class="p">
 <span id="p1" onclick="plus='<';pluss(plus);" class="pl"><</span>
@@ -44,6 +44,10 @@
 <span id="p19" onclick="plus=this.innerHTML;pluss(plus);" class="pl">'</span>
 <span id="p20" onclick="plus=this.innerHTML;pluss(plus);" class="pl">\</span>
 <span id="p21" onclick="plus=this.innerHTML;pluss(plus);" class="pl">`</span>
+<span id="p22" onclick="plus=this.innerHTML;pluss(plus);" class="pl">$</span>
+<span id="p23" onclick="plus=this.innerHTML;pluss(plus);" class="pl">?</span>
+<span id="p24" onclick="plus='&';pluss(plus);" class="pl">&</span>
+<span id="p25" onclick="plus=this.innerHTML;pluss(plus);" class="pl">|</span>
 </div>
   </body>
 <style>
@@ -260,7 +264,7 @@ if(yxif){
 ex.style.display="block";
 }else{
 run.style.display="block";
-ale();
+glh();
 }
 },1000);
 function runCode(){
@@ -477,7 +481,7 @@ glllc.push(ccc[0]);
 }
 }
 let glhtml;
-function ale() {
+function glh() {
   glhtml = tex.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const esca = glll.map(k =>
     k.replace(/[.*+?^${}()|]/g, '\\$&')
@@ -491,15 +495,20 @@ const escc = glllb.map(k =>
   const escd = glllc.map(k =>
     k.replace(/[.*+?^${}()|]/g, '\\$&')
   );
-  const rege = new RegExp(`\\b(${esca.join("|")})\\b`, "gi");
+  const rege = new RegExp(`\\b(${esca.join("|")})\\b`, "g");
   glhtml = glhtml.replace(rege, "<span class='glq'>$1</span>");
-const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "gi");
+const regea = new RegExp(`\\b(${escb.join("|")})\\b`, "g");
   glhtml = glhtml.replace(regea, "<span class='glw'>$1</span>");
-const regeb = new RegExp(`\\b(${escc.join("|")})\\b`, "gi");
+const regeb = new RegExp(`\\b(${escc.join("|")})\\b`, "g");
   glhtml = glhtml.replace(regeb, "<span class='gle'>$1</span>");
-const regec = new RegExp(`\\b(${escd.join("|")})\\b`, "gi");
+const regec = new RegExp(`\\b(${escd.join("|")})\\b`, "g");
   glhtml = glhtml.replace(regec, "<span class='glr'>$1</span>");
   gl.innerHTML = glhtml;
+  }
+glh();
+let bq,bqa;
+function ale(){
+document.getElementById("tsp").innerHTML="";
   fh = "";
   ts.style.display = "none";
   const text = tex.value;
@@ -511,15 +520,20 @@ const regec = new RegExp(`\\b(${escd.join("|")})\\b`, "gi");
   const cur = m[1];
   const matched = hasha.filter(w => w.toLowerCase().startsWith(cur.toLowerCase()));
   if (!matched.length) return;
-  fh = matched.join('<br>');
-  document.getElementById('tsp').innerHTML = fh;
+  fh = matched.join(';').split(";");
+  bq = matched.join(";").split(";");
+  for(var j=0;j<bq.length;j++){
+fh[j]=`<p onclick="bqa=this.innerHTML;autobq(bqa);">${bq[j]}</p>`;
+}
+for(let jjj=0;jjj<fh.length;jjj++){
+  document.getElementById('tsp').innerHTML += fh[jjj];
+}
   ts.style.display = 'block';
   const nextChar = text[pos];
   if (nextChar === ' ' || nextChar === ',') {
     ts.style.display = 'none';
   }
 }
-ale();
 function goto(){
 const gita=window.open("https://github.com/UPLCC/code","_blank");
 if(gita){
@@ -535,6 +549,7 @@ function pluss(plus) {
   tex.selectionStart = tex.selectionEnd = posss + plus.length;
   tex.focus();
   ale();
+  glh();
 }
 let coda,userprom;
 function downLo(){
@@ -580,10 +595,10 @@ iffile=false;
 function fileRe(){
 xzfile.click();
 filex();
-ale();
+glh();
 }
 document.getElementById("xzfile").addEventListener("change",(event)=>{
-ale();
+glh();
 const filel=event.target.files[0];
 const reader=new FileReader();
 reader.onload=function (e){
@@ -592,5 +607,23 @@ tex.value=filetext;
 }
 reader.readAsText(filel);
 });
+function autobq(bqa){
+  bqa=bqa.split("(")[0];
+  const tetex=tex.value;
+  const autbq = tex.selectionStart;
+  const leftaa = tetex.slice(0,autbq);
+  const infora = leftaa.match(/([a-zA-Z0-9.\-_/]+)$/);
+  if(!infora){
+    return;
+  }
+  const infor=infora.index;
+  const bqbefore = tex.value.slice(0,infor);
+  const bqafter = tex.value.slice(autbq);
+  tex.value = bqbefore + bqa + bqafter;
+  tex.selectionStart = tex.selectionEnd = autbq + (bqa.length-(autbq-infor));
+  tex.focus();
+  ale();
+  glh();
+}
 </script>
 </html>
