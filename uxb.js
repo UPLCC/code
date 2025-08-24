@@ -73,5 +73,14 @@ const uxb = {
   },
   idinnerHTML: function (id, value) {
     document.getElementById(id).innerHTML = value;
+  },
+  op: function (value){
+    window.open(value,"_blank");
+  },
+  idval : function (id){
+    return window[id].value;
+  },
+  idcli : function (id){
+    window[id].click();
   }
 };
