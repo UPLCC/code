@@ -239,3 +239,32 @@ function autobq(bqa){
   ale();
   glh();
 }
+let ifhf=false;
+let hftime=30;
+setInterval(()=>{
+hftime-=1;
+},1000);
+setInterval(()=>{
+if(ifhf){
+localStorage.setItem("ucodetext",tex.value);
+}
+hftime=30;
+},30000);
+function past(){
+const hfqr=window.confirm("确认恢复至上次自动保存时的代码吗");
+if(hfqr){
+tex.value=localStorage.getItem("ucodetext");
+glh();
+}
+}
+function recode(){
+const rehf=window.confirm("确认清空已自动保存的代码吗，下次自动保存剩余"+hftime+"秒");
+if(rehf){
+localStorage.removeItem("ucodetext");
+ifhf=false;
+}
+}
+function bccode(){
+localStorage.setItem("ucodetext",tex.value);
+alert("保存成功");
+}

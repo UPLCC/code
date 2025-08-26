@@ -14,14 +14,17 @@
 <span id="run" class="run" onclick="runCode();">运行</span>
 </div>
 <div id="filec" class="filec">
-<p id="bc" class="bc" onclick="downLo();">保存</p>
+<p id="bc" class="bc" onclick="downLo();">下载</p>
 <p id="dra" class="dra" onclick="fileRe();">导入</p>
+<p id="hf" class="hf" onclick="past();">恢复代码</p>
+<p id="recod" class="recod" onclick="recode();">清空已保存代码</p>
+<p id="locbc" class="locbc" onclick="bccode();">保存</p>
 <input type="file" id="xzfile" class="xzfile" style="display:none;"/>
 </div>
 <div id="fileq" class="fileq" onclick="if(iffile){filex();}"></div>
 <div id="ts" class="ts"><p id="tsp" class="tsp"></p></div>
 <pre id="gl" class="gl"></pre>
-<textarea id="tex" class="tex" oninput="ale();glh();" warp="hard"></textarea>
+<textarea id="tex" class="tex" oninput="ale();glh();if(!ifhf){ifhf=true;}" warp="hard"></textarea>
 <iframe id="runt" class="runt"></iframe>
 <div id="p" class="p">
 <span id="p1" onclick="plus='<';pluss(plus);" class="pl"><</span>
