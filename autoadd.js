@@ -30,5 +30,6 @@ const hasha = [
 "center(HTML)","value(属性)","background-color(CSS)","background-img(CSS)","uxb.ale(uxb)",
 "uxb.conlog(uxb)","uxb.locset(uxb)","uxb.locget(uxb)","uxb.locrem(uxb)","uxb.loccle(uxb)","uxb.locof(uxb)",
 "uxb.write(uxb)","uxb.prom(uxb)","uxb.goTo(uxb)","uxb.lockey(uxb)","uxb.jza(uxb)","uxb.jzb(uxb)","uxb.err(uxb)",
-"uxb.va(uxb)","uxb.idinnerHTML(uxb)","uxb.op(uxb)","uxb.idval(uxb)","uxb.idcli(uxb)","script(HTML)","style(HTML)","link(HTML)"
+"uxb.va(uxb)","uxb.idinnerHTML(uxb)","uxb.op(uxb)","uxb.idval(uxb)","uxb.idcli(uxb)","uxb.softmax(uxb)","uxb.rounds(uxb)","script(HTML)","style(HTML)","link(HTML)",
+"uxb.pai(uxb)","uxb.e(uxb)","uxb.mi(uxb)","uxb.opmi(uxb)","uxb.open(uxb)"
 ];

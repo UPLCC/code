@@ -82,5 +82,32 @@ const uxb = {
   },
   idcli : function (id){
     window[id].click();
+  },
+  softmax : function (value,number){
+    const sosj=value.split(/[\s,;:]+/gi).map(Number);
+    var xy=0;
+    const tis=sosj[number-1];
+    for(var soft=0;soft<sosj.length;soft++){
+    xy+=Math.exp(sosj[soft]);
+    }
+    return Math.exp(tis)/xy;
+  },
+  rounds : function (number){
+    return Math.PI*number**2;
+  },
+  pai : function (){
+    return Math.PI;
+  },
+  e : function (){
+    return Math.E;
+  },
+  mi : function (number,value){
+    return number**value;
+  },
+  opmi : function (number){
+    return Math.sqrt(number);
+  },
+  open : function (value,number){
+    return Math.pow(value,1/number);
   }
 };
