@@ -7,7 +7,7 @@ const hasha = [
 "split","replace","toFixed","Math.random","Math.floor",
 "Math.round","var","let","const","true","false","src",
 "addEventListener","return","push","pop","splice",
-"substr","window.open","window.confirm","grid-columns(CSS)","@keyframes(CSS)",
+"substr","window.open","window.confirm","JSON.stringify","JSON.parse","grid-columns(CSS)","@keyframes(CSS)",
 "@font-face(CSS)","width(CSS)","height(CSS)","border(CSS)","border-radius(CSS)",
 "position(CSS)","display(CSS)","margin(CSS)","margin-top(CSS)","margin-bottom(CSS)",
 "margin-left(CSS)","margin-top(CSS)","padding(CSS)","padding-left(CSS)","padding-top(CSS)",
@@ -27,9 +27,5 @@ const hasha = [
 "i(HTML)","u(HTML)","ul(HTML)","ol(HTML)","code(HTML)",
 "video(HTML)","mark(HTML)","span(HTML)","label(HTML)","src(属性)",
 "img(HTML)","href(HTML)","canvas(HTML)","em(HTML)","q(HTML)",
-"center(HTML)","value(属性)","background-color(CSS)","background-img(CSS)","uxb.ale(uxb)",
-"uxb.conlog(uxb)","uxb.locset(uxb)","uxb.locget(uxb)","uxb.locrem(uxb)","uxb.loccle(uxb)","uxb.locof(uxb)",
-"uxb.write(uxb)","uxb.prom(uxb)","uxb.goTo(uxb)","uxb.lockey(uxb)","uxb.jza(uxb)","uxb.jzb(uxb)","uxb.err(uxb)",
-"uxb.va(uxb)","uxb.idinnerHTML(uxb)","uxb.op(uxb)","uxb.idval(uxb)","uxb.idcli(uxb)","uxb.softmax(uxb)","uxb.rounds(uxb)","script(HTML)","style(HTML)","link(HTML)",
-"uxb.pai(uxb)","uxb.e(uxb)","uxb.mi(uxb)","uxb.opmi(uxb)","uxb.open(uxb)"
+"center(HTML)","value(属性)","background-color(CSS)","background-img(CSS)","script(HTML)","style(HTML)","link(HTML)"
 ];
